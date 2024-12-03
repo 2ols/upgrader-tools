@@ -1,0 +1,174 @@
+[
+  {
+    "name": "modify_file_lines",
+    "description": "Modify the lines of a given file.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path to the file.",
+          "example": "app/Models/User.php"
+        },
+        "selection": {
+          "type": "string",
+          "description": "The lines numbers interval that needs to be modified, as `start:end`.",
+          "example": "5:6"
+        },
+        "new_content": {
+          "type": "string",
+          "description": "The text that will replace the selected lines.",
+          "example": "protected $guarded = [];\n"
+        }
+      },
+      "required": ["path", "selection", "new_content"]
+    }
+  },
+  {
+    "name": "modify_line",
+    "description": "Modify the line of a given file.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path to the file to modify.",
+          "example": "app/Models/User.php"
+        },
+        "line_number": {
+          "type": "string",
+          "description": "The line number that needs to be modified.",
+          "example": "5"
+        },
+        "new_content": {
+          "type": "string",
+          "description": "The text that will replace the line number."
+        }
+      },
+      "required": ["path", "line_number", "new_content"]
+    }
+  },
+  {
+    "name": "remove_line",
+    "description": "Remove the line number of a given file.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path to the file.",
+          "example": "app/Models/User.php"
+        },
+        "line_number": {
+          "type": "string",
+          "description": "The line number that needs to be removed.",
+          "example": "5"
+        }
+      },
+      "required": ["path", "line_number"]
+    }
+  },
+  {
+    "name": "insert_after_line",
+    "description": "Insert content after a given line number.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path to the file.",
+          "example": "app/Models/User.php"
+        },
+        "line_number": {
+          "type": "string",
+          "description": "The line number after which the content will be inserted.",
+          "example": "5"
+        },
+        "content": {
+          "type": "string",
+          "description": "The content that will be inserted after the line number."
+        }
+      },
+      "required": ["path", "line_number", "content"]
+    }
+  },
+  {
+    "name": "move_file",
+    "description": "Move a file from a location to another.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "The path to the existing file.",
+          "example": "app/User.php"
+        },
+        "to": {
+          "type": "string",
+          "description": "The new location of the file.",
+          "example": "app/Models/User.php"
+        }
+      },
+      "required": ["from", "to"]
+    }
+  },
+  {
+    "name": "add_file",
+    "description": "Add a new file in the project.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path where the file will be written.",
+          "example": "app/Models/Post.php"
+        },
+        "content": {
+          "type": "string",
+          "description": "The text that will replace the selected lines.",
+          "example": "use Illuminate\\Database\\Eloquent\\Model;\n\nclass Post extends Model {\n  //\n}"
+        }
+      },
+      "required": ["path", "content"]
+    }
+  },
+  {
+    "name": "run_artisan_commands",
+    "description": "Run `php artisan` commands.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "commands": {
+          "type": "array",
+          "description": "The commands to run, without `php artisan`.",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "vendor:publish --provider=\"Laravel\\Pennant\\PennantServiceProvider\"",
+            "migrate"
+          ]
+        }
+      },
+      "required": ["commands"]
+    }
+  },
+  {
+    "name": "run_composer_commands",
+    "description": "Run `composer` commands.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "commands": {
+          "type": "array",
+          "description": "The commands to run, without `composer`.",
+          "items": {
+            "type": "string"
+          },
+          "example": ["require laravel/pennant", "dump-autoload"]
+        }
+      },
+      "required": ["commands"]
+    }
+  }
+]
